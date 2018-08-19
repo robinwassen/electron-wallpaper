@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>electron-wallpaper dashboard example</title>
+    <style>
+      body {
+        padding: 10px 20px;
+        color: #333;
+        background-color: transparent;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      h1, h2, h3 {
+        margin: 0 0 10px;
+        font-weight: normal;
+      }
+
+      p {
+        font-size: 12px;
+      }
+
+      .center-text {
+        text-align: center;
+      }
+
+      .speedGauge_container {
+          border: 2px solid #138830;
+          height: 20px;
+          position: relative;
+          margin-bottom: 10px;
+      }
+
+      .speedGauge_bar {
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          width: 20%;
+          background-color: #138830;
+          transition: width 0.3s linear;
+      }
+
+    </style>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+  </head>
+  <body>
+    <h1 class="center-text">electron-wallpaper example dashboard</h1>
+    <div class="pure-g">
+        <div class="pure-u-1-5">
+            <h2>Network speed</h2>
+            <h3>DOWN: <span id="networkSpeed_downValue">120</span> Mbit/s</h3>
+            <div class="speedGauge_container">
+                <div class="speedGauge_bar" id="networkSpeed_downBar"></div>
+            </div>
+            <h3>UP: <span id="networkSpeed_upValue">120</span> Mbit/s</h3>
+            <div class="speedGauge_container">
+                <div class="speedGauge_bar" id="networkSpeed_upBar"></div>
+            </div>
+        </div>
+        <div class="pure-u-1-5"></div>
+        <div class="pure-u-1-5"></div>
+        <div class="pure-u-1-5"></div>
+        <div class="pure-u-1-5"></div>
+    </div>
+    <script src="dashboard.js"></script>
+  </body>
+</html>

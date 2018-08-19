@@ -1,0 +1,45 @@
+{
+  "name": "electron-wallpaper",
+  "version": "1.0.0",
+  "description": "Node module that allows you to attach a window as wallpaper in Windows.",
+  "main": "lib/electron-wallpaper.js",
+  "homepage": "https://github.com/robinwassen/electron-wallpaper",
+  "gypfile": true,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/robinwassen/electron-wallpaper.git"
+  },
+  "keywords": [
+    "window",
+    "dashboard",
+    "electron",
+    "windows"
+  ],
+  "scripts": {
+    "lint": "eslint lib example && cpplint --linelength=120 --recursive src",
+    "example": "electron ./example",
+    "readme": "jsdoc2md --template docs/README.hbs lib/electron-wallpaper.js > README.md",
+    "configure": "node-gyp configure",
+    "build": "node-gyp rebuild",
+    "rebuild": "node-gyp rebuild",
+    "rebuild-electron": "electron-rebuild -f",
+    "install": "prebuild-install || node-gyp rebuild",
+    "prebuild-release": "prebuild --all --strip"
+  },
+  "author": "Robin Andersson <me@robinwassen.com>",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=4"
+  },
+  "devDependencies": {
+    "electron": "^2.0.7",
+    "electron-rebuild": "^1.8.2",
+    "eslint": "^4.19.1",
+    "jsdoc-to-markdown": "^4.0.1",
+    "prebuild": "^7.6.2"
+  },
+  "dependencies": {
+    "bindings": "^1.3.0",
+    "prebuild-install": "^5.0.0"
+  }
+}

@@ -1,0 +1,40 @@
+# appveyor file
+# http://www.appveyor.com/docs/appveyor-yml
+image:
+  - Visual Studio 2017
+
+init:
+  - git config --global core.autocrlf input
+
+cache:
+  - C:\Users\appveyor\.node-gyp
+  - '%AppData%\npm-cache'
+
+environment:
+  GITHUB_TOKEN:
+    secure: f+0cd8hOyzzcyBfUzfAudD5r9BYd7SbCLQSO+HPgRs76El3EO2+GkOxaxbd5U07/
+
+  matrix:
+    - nodejs_version: 10
+    - nodejs_version: 8
+    - nodejs_version: 6
+    - nodejs_version: 4
+
+platform:
+  - x86
+  - x64
+
+install:
+  - pip install cpplint
+  - ps: Install-Product node $env:nodejs_version x64
+  - npm install
+
+build: off
+
+test_script:
+  - node --version
+  - npm --version
+  - cmd: npm run lint
+
+deploy_script:
+  - scripts\prebuild-publish.bat %nodejs_version%

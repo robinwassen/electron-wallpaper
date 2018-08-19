@@ -1,0 +1,6 @@
+{
+  "name": "electron-wallpaper-example",
+  "version": "1.0.0",
+  "description": "An example application to demonstrate electron-wallpaper",
+  "main": "main.js"
+}
