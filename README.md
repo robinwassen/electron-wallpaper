@@ -15,6 +15,17 @@ electron-wallpaper
 
 electron-wallpaper allows you to insert a Window between the wallpaper and the desktop icons in Windows. User input interaction with the window is not possible, therefore this module is suitable if you wish to build a desktop dashboard application such as [Rainmeter](https://rainmeter.net) but use Electron and NodeJS.
 
+Example application
+-------------
+
+![Example application gif](./media/electron-wallpaper-example.gif)
+
+An example application is located in the `/example/` dir, start it by running:
+
+```sh
+$ npm run example
+```
+
 Installation
 ------------
 
@@ -46,17 +57,6 @@ const electronWallpaper = require('electron-wallpaper');
 const currentWindow = require('electron').remote.getCurrentWindow();
 
 electronWallpaper.attachWindow(currentWindow);
-```
-
-Example application
--------------
-
-![Example application gif](./media/electron-wallpaper-example.gif)
-
-An example application is located in the `/example/` dir, start it by running:
-
-```sh
-$ npm run example
 ```
 
 Contribute
