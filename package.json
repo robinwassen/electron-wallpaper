@@ -1,6 +1,6 @@
 {
   "name": "electron-wallpaper",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Node module that allows you to attach a window as wallpaper in Windows.",
   "main": "lib/electron-wallpaper.js",
   "homepage": "https://github.com/robinwassen/electron-wallpaper",
