@@ -4,6 +4,8 @@ const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
+app.allowRendererProcessReuse = true;
+
 let mainWindow;
 
 /**
@@ -15,7 +17,10 @@ let mainWindow;
 const createWindow = function() {
   const windowProperties = {
     width: 800,
-    height: 600
+    height: 600,
+    webPreferences: {
+      nodeIntegration: true
+    }
   };
 
   mainWindow = new BrowserWindow(windowProperties);

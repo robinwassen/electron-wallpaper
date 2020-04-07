@@ -14,47 +14,43 @@
  * limitations under the License.
  */
 
-#include <node.h>
-#include <node_buffer.h>
+#include <napi.h>
 
 #include "./electronwallpaper.h"
+#include "./output.h"
 
 namespace bindings {
-  using v8::Boolean;
-  using v8::Exception;
-  using v8::FunctionCallbackInfo;
-  using v8::HandleScope;
-  using v8::Isolate;
-  using v8::Local;
-  using v8::Object;
-  using v8::String;
-  using v8::Value;
 
+  using Napi::Uint8Array;
+  using Napi::Env;
+  using Napi::CallbackInfo;
+  using Napi::Object;
+  using Napi::String;
+  using Napi::Function;
+  using Napi::Function;
+  using Napi::Function;
   using electronwallpaper::AttachWindow;
+  using Output::CreateError;
 
-  void AttachWindowExport(const FunctionCallbackInfo<Value>& args) {
-    Isolate* isolate = Isolate::GetCurrent();
-    HandleScope scope(isolate);
+  void AttachWindowExport(const CallbackInfo& info) {
+    Env env = info.Env();
 
-    if (args.Length() < 1) {
-      isolate->ThrowException(Exception::TypeError(String::NewFromUtf8(isolate, "Expected one argument")));
-      return;
+    if (info.Length() < 1) {
+      CreateError(env, "attachWindow expects one argument").ThrowAsJavaScriptException();
+    } else if (!info[0].IsObject()) {
+      CreateError(env, "attachWindow expects first argument to be a window handle buffer").ThrowAsJavaScriptException();
     }
 
-    if (!args[0]->IsObject()) {
-      Local<String> message = String::NewFromUtf8(isolate, "Expected first argument to be a window handle buffer");
-      isolate->ThrowException(Exception::TypeError(message));
-      return;
-    }
-
-    unsigned char* windowHandleBuffer = (unsigned char*)node::Buffer::Data(args[0]->ToObject());
+    unsigned char* windowHandleBuffer = info[0].As<Uint8Array>().Data();
 
     AttachWindow(windowHandleBuffer);
   }
 
-  void Initialize(Local<Object> exports) {
-    NODE_SET_METHOD(exports, "attachWindow", AttachWindowExport);
+  Object Initialize(Env env, Object exports) {
+    exports.Set(String::New(env, "attachWindow"), Function::New(env, AttachWindowExport));
+    return exports;
   }
 }  // namespace bindings
 
-NODE_MODULE(module_name, bindings::Initialize)
+using bindings::Initialize;
+NODE_API_MODULE(module_name, Initialize)
